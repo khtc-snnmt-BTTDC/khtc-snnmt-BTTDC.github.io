@@ -17,7 +17,16 @@ const DB = {
         mat_khau_hash: 'khtc123',
         ho_ten: 'Phòng Kế hoạch - Tài chính (Sở NN&MT)',
         vai_tro: 'admin_tong',
-        ma_don_vi: 'SNNMT_KHTC',
+        ma_don_vi: 'KHTC.SNNMT',
+        ten_don_vi: 'Phòng Kế hoạch - Tài chính Sở'
+      },
+      {
+        id: 'user-01-slug',
+        ten_dang_nhap: 'KHTC.SNNMT',
+        mat_khau_hash: 'khtc123',
+        ho_ten: 'Phòng Kế hoạch - Tài chính Sở',
+        vai_tro: 'admin_tong',
+        ma_don_vi: 'KHTC.SNNMT',
         ten_don_vi: 'Phòng Kế hoạch - Tài chính Sở'
       },
       {
@@ -26,8 +35,17 @@ const DB = {
         mat_khau_hash: 'bttdc123',
         ho_ten: 'Phòng Bồi thường, hỗ trợ, tái định cư trực thuộc Sở',
         vai_tro: 'quan_ly_bttdc',
-        ma_don_vi: 'SNNMT_BTTDC',
+        ma_don_vi: 'BTTDC.SNNMT',
         ten_don_vi: 'Phòng Bồi thường, Hỗ trợ, Tái định cư Sở'
+      },
+      {
+        id: 'user-02-slug',
+        ten_dang_nhap: 'BTTDC.SNNMT',
+        mat_khau_hash: 'bttdc123',
+        ho_ten: 'Phòng Bồi thường, hỗ trợ, tái định cư Sở',
+        vai_tro: 'quan_ly_bttdc',
+        ma_don_vi: 'BTTDC.SNNMT',
+        ten_don_vi: 'Phòng Bồi thường, hỗ trợ, tái định cư Sở'
       },
       {
         id: 'user-03',
@@ -35,11 +53,47 @@ const DB = {
         mat_khau_hash: 'vuonlai123',
         ho_ten: 'Ban QLDA ĐTXD phường Vườn Lài',
         vai_tro: 'don_vi_thuc_hien',
-        ma_don_vi: 'BQLDA_VUONLAI',
+        ma_don_vi: 'BQLDA.VuonLai',
         ten_don_vi: 'Ban QLDA ĐTXD phường Vườn Lài'
       },
       {
-        id: 'user-04',
+        id: 'user-03-slug',
+        ten_dang_nhap: 'BQLDA.VuonLai',
+        mat_khau_hash: 'vuonlai123',
+        ho_ten: 'Ban QLDA ĐTXD phường Vườn Lài',
+        vai_tro: 'don_vi_thuc_hien',
+        ma_don_vi: 'BQLDA.VuonLai',
+        ten_don_vi: 'Ban QLDA ĐTXD phường Vườn Lài'
+      },
+      {
+        id: 'user-04-giaothong',
+        ten_dang_nhap: 'BQLDA.GiaoThong.HCM',
+        mat_khau_hash: '123456',
+        ho_ten: 'BQL DA ĐTXD các công trình giao thông thành phố',
+        vai_tro: 'don_vi_thuc_hien',
+        ma_don_vi: 'BQLDA.GiaoThong.HCM',
+        ten_don_vi: 'Ban QLDA Giao thông TP.HCM'
+      },
+      {
+        id: 'user-05-dian',
+        ten_dang_nhap: 'BQLDA.DiAn',
+        mat_khau_hash: '123456',
+        ho_ten: 'Ban QLDA ĐTXD phường Dĩ An',
+        vai_tro: 'don_vi_thuc_hien',
+        ma_don_vi: 'BQLDA.DiAn',
+        ten_don_vi: 'Ban QLDA ĐTXD phường Dĩ An'
+      },
+      {
+        id: 'user-06-brvt',
+        ten_dang_nhap: 'BQLDA.GiaoThong.NNBRVT',
+        mat_khau_hash: '123456',
+        ho_ten: 'BQL DA ĐTXD các CT Giao thông và NN Bà Rịa - Vũng Tàu',
+        vai_tro: 'don_vi_thuc_hien',
+        ma_don_vi: 'BQLDA.GiaoThong.NNBRVT',
+        ten_don_vi: 'Ban QLDA Giao thông - Nông nghiệp BR-VT'
+      },
+      {
+        id: 'user-07',
         ten_dang_nhap: 'ban_gpmb_tp',
         mat_khau_hash: 'gpmb123',
         ho_ten: 'Ban Bồi thường GPMB TP.HCM',
@@ -50,6 +104,12 @@ const DB = {
     ],
 
     don_vi: [
+      { ma_don_vi: 'KHTC.SNNMT', ten_don_vi: 'Phòng Kế hoạch - Tài chính Sở' },
+      { ma_don_vi: 'BTTDC.SNNMT', ten_don_vi: 'Phòng Bồi thường, hỗ trợ, tái định cư Sở' },
+      { ma_don_vi: 'BQLDA.VuonLai', ten_don_vi: 'Ban QLDA ĐTXD phường Vườn Lài' },
+      { ma_don_vi: 'BQLDA.GiaoThong.HCM', ten_don_vi: 'BQL DA ĐTXD các công trình giao thông thành phố' },
+      { ma_don_vi: 'BQLDA.DiAn', ten_don_vi: 'Ban QLDA ĐTXD phường Dĩ An' },
+      { ma_don_vi: 'BQLDA.GiaoThong.NNBRVT', ten_don_vi: 'Ban QLDA Giao thông và Nông nghiệp BR-VT' },
       { ma_don_vi: 'SNNMT_KHTC', ten_don_vi: 'Phòng Kế hoạch - Tài chính, Sở Nông nghiệp và Môi trường' },
       { ma_don_vi: 'SNNMT_BTTDC', ten_don_vi: 'Phòng Bồi thường, hỗ trợ, tái định cư trực thuộc Sở' },
       { ma_don_vi: 'BQLDA_VUONLAI', ten_don_vi: 'Ban QLDA ĐTXD phường Vườn Lài' },
@@ -65,7 +125,7 @@ const DB = {
         stt_hien_thi: 1,
         ten_du_an: 'Dự án Nâng cấp, mở rộng đường Vườn Lài và xây dựng cầu Vàm Thuật',
         du_an_thanh_phan: 'Đoạn qua phường Vườn Lài',
-        ma_don_vi_gpmb: 'BQLDA_VUONLAI',
+        ma_don_vi_gpmb: 'BQLDA.VuonLai',
         chu_dau_tu_don_vi_gpmb: 'Ban QLDA ĐTXD phường Vườn Lài',
         dia_ban: 'Phường Vườn Lài',
         nhom_du_an: 'Trọng điểm',
@@ -89,6 +149,68 @@ const DB = {
         tinh_trang_tong_the: 'Đang triển khai',
         ma_ky: '09/2026',
         ghi_chu: 'Dự án trọng điểm của phường Vườn Lài, giải ngân đạt tiến độ',
+        trang_thai_nop: 'da_nop'
+      },
+      {
+        id: 'DA_001',
+        stt_hien_thi: 1,
+        ten_du_an: 'Dự án đầu tư xây dựng đường cao tốc TP. Hồ Chí Minh - Mộc Bài giai đoạn 1: Dự án TP3 - Bồi thường, hỗ trợ, tái định cư',
+        du_an_thanh_phan: 'Dự án thành phần 3',
+        ma_don_vi_gpmb: 'BQLDA.GiaoThong.HCM',
+        chu_dau_tu_don_vi_gpmb: 'BQL DA ĐTXD các công trình giao thông thành phố',
+        dia_ban: 'Khu vực Thành phố Hồ Chí Minh cũ',
+        nhom_du_an: 'Dự án trọng điểm',
+        tong_dien_tich_thu_hoi: 2150000,
+        dien_tich_da_thu_hoi: 980000,
+        tong_so_ho_anh_huong: 3200,
+        so_co_tb_thu_hoi: 3100,
+        so_da_kiem_dem: 2950,
+        so_da_duyet_pa: 2700,
+        so_da_cong_khai_pa: 2600,
+        so_da_nhan_tien: 2400,
+        so_da_ban_giao_mb: 2200,
+        tong_kinh_phi_duyet: 7200000,
+        gia_tri_da_chi_tra: 4800000,
+        so_ho_tai_dinh_cu: 850,
+        so_da_bo_tri_tdc: 620,
+        ke_hoach_von_nam: 3500000,
+        giai_ngan_luy_ke_nam: 2900000,
+        moc_ke_hoach_gpmb: '2027-12-31',
+        ngay_hoan_thanh_thuc_te: '2027-12-31',
+        tinh_trang_tong_the: 'Đang triển khai',
+        ma_ky: '09/2026',
+        ghi_chu: 'Dự án trọng điểm cao tốc TP.HCM - Mộc Bài',
+        trang_thai_nop: 'da_nop'
+      },
+      {
+        id: 'DA_120',
+        stt_hien_thi: 120,
+        ten_du_an: 'Dự án Nâng cấp, mở rộng đường ĐT 743 đoạn qua địa bàn TP Dĩ An',
+        du_an_thanh_phan: 'Đoạn Dĩ An',
+        ma_don_vi_gpmb: 'BQLDA.DiAn',
+        chu_dau_tu_don_vi_gpmb: 'Ban QLDA ĐTXD phường Dĩ An',
+        dia_ban: 'Khu vực Bình Dương cũ',
+        nhom_du_an: 'Thông thường',
+        tong_dien_tich_thu_hoi: 180000,
+        dien_tich_da_thu_hoi: 145000,
+        tong_so_ho_anh_huong: 920,
+        so_co_tb_thu_hoi: 920,
+        so_da_kiem_dem: 910,
+        so_da_duyet_pa: 890,
+        so_da_cong_khai_pa: 880,
+        so_da_nhan_tien: 850,
+        so_da_ban_giao_mb: 820,
+        tong_kinh_phi_duyet: 1650000,
+        gia_tri_da_chi_tra: 1420000,
+        so_ho_tai_dinh_cu: 180,
+        so_da_bo_tri_tdc: 165,
+        ke_hoach_von_nam: 600000,
+        giai_ngan_luy_ke_nam: 550000,
+        moc_ke_hoach_gpmb: '2026-12-31',
+        ngay_hoan_thanh_thuc_te: '2026-12-31',
+        tinh_trang_tong_the: 'Cơ bản hoàn thành',
+        ma_ky: '09/2026',
+        ghi_chu: 'Tiến độ bồi thường đạt yêu cầu',
         trang_thai_nop: 'da_nop'
       },
       {
@@ -215,7 +337,7 @@ const DB = {
         const { data, error } = await this.client
           .from(CONFIG.BANG.TAI_KHOAN)
           .select('*, don_vi(*)')
-          .eq('ten_dang_nhap', tenDangNhap.trim())
+          .ilike('ten_dang_nhap', tenDangNhap.trim())
           .eq('mat_khau_hash', matKhau.trim())
           .eq('kich_hoat', true)
           .maybeSingle();
