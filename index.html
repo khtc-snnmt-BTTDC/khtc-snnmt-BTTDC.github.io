@@ -239,6 +239,112 @@
       padding-top: 4px;
     }
 
+    /* GIAO DIỆN ĐĂNG NHẬP 3 NHÓM TÀI KHOẢN */
+    .login-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 860px) {
+      .login-layout { grid-template-columns: 1fr; }
+    }
+    .quick-roles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .quick-role-item {
+      border: 1.5px solid var(--g2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: #fafcfb;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .quick-role-item:hover {
+      border-color: var(--xc);
+      background: #fff;
+      transform: translateX(3px);
+      box-shadow: 0 4px 14px rgba(45,106,79,0.1);
+    }
+    .role-badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-admin { background: #f3e8ff; color: #6b21a8; }
+    .badge-manager { background: #dbeafe; color: #1e40af; }
+    .badge-unit { background: #fef3c7; color: #92400e; }
+
+    .login-form-panel {
+      border: 1.5px solid var(--g2);
+      border-radius: 12px;
+      padding: 18px 20px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .login-field { margin-bottom: 12px; }
+    .login-field label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--g5);
+      margin-bottom: 4px;
+    }
+    .login-field input {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid var(--g2);
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 13px;
+      outline: none;
+      transition: 0.15s;
+    }
+    .login-field input:focus {
+      border-color: var(--xc);
+      box-shadow: 0 0 0 3px rgba(82,183,136,0.2);
+    }
+    .btn-login-submit {
+      width: 100%;
+      padding: 11px;
+      background: linear-gradient(135deg, var(--xd), var(--xc));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-login-submit:hover {
+      opacity: 0.94;
+      box-shadow: 0 4px 14px rgba(27,67,50,0.3);
+    }
+    .btn-logout {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 4px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .btn-logout:hover {
+      background: rgba(220,38,38,0.35);
+      border-color: rgba(220,38,38,0.6);
+    }
+
     /* ============================================================
        1. SIDEBAR BÊN TRÁI
        ============================================================ */
@@ -806,53 +912,105 @@
 <body>
 
   <!-- ============================================================
-       0. MÀN HÌNH ĐĂNG NHẬP & CHỌN PHÂN KHU (LOGIN PORTAL)
+       0. MÀN HÌNH ĐĂNG NHẬP 3 NHÓM TÀI KHOẢN (LOGIN PORTAL)
        ============================================================ -->
   <div id="loginOverlay">
     <div class="login-box">
       <div class="login-header">
         <div class="login-logo">🏛️</div>
-        <div class="login-title">BÁO CÁO ĐỊNH KỲ SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG</div>
-        <div class="login-sub">Hệ thống thông tin báo cáo, giám sát tiến độ & sản xuất ngành NN&MT TP.HCM</div>
+        <div class="login-title">BÁO CÁO ĐỊNH KỲ SỞ NÔNG NGHIỆP VÀ MÔI TRƯỜNG TP.HCM</div>
+        <div class="login-sub">Cổng Thông tin Bồi thường, Tái định cư (BTTDC) & Báo cáo Sản xuất Nông nghiệp</div>
       </div>
 
       <div class="login-body">
-        <div class="portal-section-title">Vui lòng chọn Phân khu làm việc</div>
+        <div class="login-layout">
+          <!-- CỘT 1: 3 NHÓM TÀI KHOẢN HỆ THỐNG (CHỌN NHANH) -->
+          <div>
+            <div class="portal-section-title">Chọn nhanh 3 nhóm tài khoản mẫu</div>
+            <p style="font-size:11.5px;color:var(--g4);margin:6px 0 12px;">Nhấp vào thẻ tài khoản bên dưới để tự động điền và đăng nhập kiểm thử ngay:</p>
 
-        <div class="portal-grid">
-          <!-- PHÂN KHU 1: BỒI THƯỜNG GPMB -->
-          <div class="portal-card" onclick="APP.chonPhanKhu('boi_thuong')">
-            <div>
-              <div class="portal-badge badge-gpmb">Phân khu Dự án & Giải phóng mặt bằng</div>
-              <div class="portal-icon">🏛️</div>
-              <div class="portal-name">Bồi thường, Hỗ trợ, Tái định cư & GPMB</div>
-              <div class="portal-desc">
-                Theo dõi tiến độ thu hồi đất, kiểm đếm, phương án bồi thường, bố trí tái định cư, vốn đầu tư công và giải ngân cho toàn bộ các dự án đầu tư trên địa bàn TP (theo TT 44/2026/TT-BTC & NĐ 88/2024/NĐ-CP).
+            <div class="quick-roles-list">
+              <!-- NHÓM 1: ADMIN SỞ KHTC -->
+              <div class="quick-role-item" onclick="APP.chonNhanhTaiKhoan('khtc.snnmt', 'khtc123')">
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                    <span class="role-badge badge-admin">👑 Nhóm 1: Admin Tổng Sở</span>
+                    <strong style="font-size:13px;color:var(--xd);">khtc.snnmt</strong>
+                  </div>
+                  <div style="font-size:11.5px;font-weight:600;color:var(--g5);">Phòng Kế hoạch - Tài chính, Sở NN&MT</div>
+                  <div style="font-size:11px;color:var(--g4);margin-top:2px;">Toàn quyền hệ thống, xem và duyệt số liệu cả 2 phân khu, quản trị danh mục.</div>
+                </div>
+                <button class="btn-action btn-primary" style="padding:5px 10px;font-size:11px;white-space:nowrap;">Vào ➔</button>
+              </div>
+
+              <!-- NHÓM 2: QUẢN LÝ BTTDC SỞ -->
+              <div class="quick-role-item" onclick="APP.chonNhanhTaiKhoan('bttdc.snnmt', 'bttdc123')">
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                    <span class="role-badge badge-manager">📋 Nhóm 2: Quản lý BTTDC</span>
+                    <strong style="font-size:13px;color:var(--blue);">bttdc.snnmt</strong>
+                  </div>
+                  <div style="font-size:11.5px;font-weight:600;color:var(--g5);">Phòng Bồi thường, hỗ trợ, tái định cư trực thuộc Sở</div>
+                  <div style="font-size:11px;color:var(--g4);margin-top:2px;">Theo dõi đôn đốc toàn TP; nhập liệu TẤT CẢ dự án; có quyền thêm, xóa dự án; thêm, xóa kỳ.</div>
+                </div>
+                <button class="btn-action btn-primary" style="padding:5px 10px;font-size:11px;white-space:nowrap;background:var(--blue);">Vào ➔</button>
+              </div>
+
+              <!-- NHÓM 3: ĐƠN VỊ TRỰC TIẾP (VƯỜN LÀI) -->
+              <div class="quick-role-item" onclick="APP.chonNhanhTaiKhoan('BQLDA_DTXD_VuonLai', 'vuonlai123')">
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+                    <span class="role-badge badge-unit">🏗️ Nhóm 3: Đơn vị thực hiện</span>
+                    <strong style="font-size:13px;color:var(--amb);">BQLDA_DTXD_VuonLai</strong>
+                  </div>
+                  <div style="font-size:11.5px;font-weight:600;color:var(--g5);">Ban QLDA ĐTXD phường Vườn Lài</div>
+                  <div style="font-size:11px;color:var(--g4);margin-top:2px;">Chỉ nhập và thấy tiến độ dự án của chính đơn vị mình phụ trách.</div>
+                </div>
+                <button class="btn-action btn-primary" style="padding:5px 10px;font-size:11px;white-space:nowrap;background:var(--amb);">Vào ➔</button>
               </div>
             </div>
-            <button class="btn-enter-portal">
-              <span>Vào phân khu Bồi thường GPMB</span> <span>➔</span>
-            </button>
           </div>
 
-          <!-- PHÂN KHU 2: SẢN XUẤT NÔNG NGHIỆP -->
-          <div class="portal-card" onclick="APP.chonPhanKhu('san_xuat')">
+          <!-- CỘT 2: FORM ĐĂNG NHẬP TIÊU CHUẨN -->
+          <div class="login-form-panel">
             <div>
-              <div class="portal-badge badge-sx">Phân khu Sản xuất Chuyên ngành</div>
-              <div class="portal-icon">🌾</div>
-              <div class="portal-name">Sản xuất Nông nghiệp & Phát triển nông thôn</div>
-              <div class="portal-desc">
-                Cổng nhập liệu và tổng hợp các biểu mẫu chỉ tiêu định kỳ tháng, quý, năm cho các lĩnh vực: Thủy sản, Trồng trọt, Chăn nuôi, Lâm nghiệp và Chương trình Xây dựng Nông thôn mới (Mô hình V2).
+              <div class="portal-section-title">Đăng nhập tài khoản</div>
+              <p style="font-size:11.5px;color:var(--g4);margin:6px 0 14px;">Nhập tài khoản được Sở NN&MT cấp:</p>
+
+              <div class="login-field">
+                <label>Tên đăng nhập</label>
+                <input type="text" id="inpLoginUser" placeholder="Ví dụ: khtc.snnmt, bttdc.snnmt..." value="khtc.snnmt">
+              </div>
+
+              <div class="login-field">
+                <label>Mật khẩu</label>
+                <input type="password" id="inpLoginPass" placeholder="Nhập mật khẩu" value="khtc123">
+              </div>
+
+              <div class="login-field">
+                <label>Phân khu làm việc ban đầu</label>
+                <select id="selLoginPortal" class="form-input" style="width:100%;padding:8px 10px;">
+                  <option value="boi_thuong" selected>🏛️ Phân khu Bồi thường, Hỗ trợ, Tái định cư & GPMB</option>
+                  <option value="san_xuat">🌾 Phân khu Sản xuất Nông nghiệp & Phát triển nông thôn</option>
+                </select>
+              </div>
+
+              <div id="loginErrMsg" style="color:var(--red);font-size:11.5px;margin-bottom:10px;min-height:16px;font-weight:600;"></div>
+            </div>
+
+            <div>
+              <button class="btn-login-submit" onclick="APP.xuLyDangNhap()">
+                🔐 ĐĂNG NHẬP HỆ THỐNG
+              </button>
+              <div style="text-align:center;font-size:11px;color:var(--g4);margin-top:10px;">
+                Bảo mật theo Nghị định 88/2024/NĐ-CP & TT 44/2026/TT-BTC
               </div>
             </div>
-            <button class="btn-enter-portal" style="background:linear-gradient(135deg, #1b4332, #2d6a4f);">
-              <span>Vào phân khu Sản xuất Nông nghiệp</span> <span>➔</span>
-            </button>
           </div>
         </div>
 
         <div class="login-footer-note">
-          Tài khoản quản trị Phòng KHTC · Ban Bồi thường GPMB TP · Các Chi cục trực thuộc Sở
+          Hệ thống Báo cáo định kỳ Sở Nông nghiệp và Môi trường TP.HCM · Phiên bản 1.2.0
         </div>
       </div>
     </div>
@@ -878,12 +1036,20 @@
       </div>
 
       <div class="sb-user">
-        <div class="sb-user-name">Sở Nông nghiệp và Môi trường</div>
-        <div class="sb-user-role" id="sbUserRole">Đầu mối Tổng hợp toàn TP</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px;">
+          <div style="overflow:hidden;">
+            <div class="sb-user-name" id="sbUserName" style="text-overflow:ellipsis;overflow:hidden;white-space:nowrap;">Sở Nông nghiệp và MT</div>
+            <div class="sb-user-role" id="sbUserRole">Đầu mối Tổng hợp toàn TP</div>
+          </div>
+          <button class="btn-logout" onclick="APP.dangXuat()" title="Đăng xuất khỏi hệ thống">🚪 Thoát</button>
+        </div>
       </div>
 
       <div class="sb-ky">
-        <div class="sb-ky-lbl">Kỳ báo cáo</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;">
+          <div class="sb-ky-lbl">Kỳ báo cáo</div>
+          <button id="btnThemKy" style="display:none;padding:2px 6px;font-size:10px;background:rgba(255,255,255,0.2);color:#fff;border:none;border-radius:4px;cursor:pointer;" onclick="APP.moModalThemKy()" title="Tạo kỳ báo cáo mới">+ Thêm kỳ</button>
+        </div>
         <select id="selKyBaoCao" class="sb-ky-select" onchange="APP.doiKyBaoCao(this.value)">
           <option value="09/2026" selected>Tháng 09/2026 (Đang thu thập)</option>
           <option value="08/2026">Tháng 08/2026 (Đã khóa)</option>
@@ -992,23 +1158,31 @@
 
         <!-- TAB 1: TIẾN ĐỘ GPMB -->
         <div id="tabTienDo" class="tab-view active">
-          <div class="toolbar" style="margin-top:14px;">
-            <div class="search-box">
-              <span class="search-icon">🔍</span>
-              <input type="text" id="txtSearch" class="inp-search" placeholder="Tìm kiếm tên dự án, dự án thành phần, địa bàn..." oninput="APP.apDungBoLoc()">
+          <div class="toolbar" style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;flex:1;">
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="txtSearch" class="inp-search" placeholder="Tìm kiếm tên dự án, dự án thành phần, địa bàn..." oninput="APP.apDungBoLoc()">
+              </div>
+              <select id="selNhomDA" class="filter-select" onchange="APP.apDungBoLoc()">
+                <option value="">-- Tất cả nhóm dự án --</option>
+                <option value="Trọng điểm">Dự án Trọng điểm</option>
+                <option value="Thông thường">Dự án Thông thường</option>
+              </select>
+              <select id="selTinhTrang" class="filter-select" onchange="APP.apDungBoLoc()">
+                <option value="">-- Tất cả tình trạng --</option>
+                <option value="Đang triển khai">Đang triển khai</option>
+                <option value="Cơ bản hoàn thành">Cơ bản hoàn thành</option>
+                <option value="Đã hoàn thành">Đã hoàn thành</option>
+                <option value="Chưa triển khai">Chưa triển khai</option>
+              </select>
             </div>
-            <select id="selNhomDA" class="filter-select" onchange="APP.apDungBoLoc()">
-              <option value="">-- Tất cả nhóm dự án --</option>
-              <option value="Trọng điểm">Dự án Trọng điểm</option>
-              <option value="Thông thường">Dự án Thông thường</option>
-            </select>
-            <select id="selTinhTrang" class="filter-select" onchange="APP.apDungBoLoc()">
-              <option value="">-- Tất cả tình trạng --</option>
-              <option value="Đang triển khai">Đang triển khai</option>
-              <option value="Cơ bản hoàn thành">Cơ bản hoàn thành</option>
-              <option value="Đã hoàn thành">Đã hoàn thành</option>
-              <option value="Chưa triển khai">Chưa triển khai</option>
-            </select>
+            <!-- CÁC NÚT THAO TÁC QUẢN TRỊ (CHỈ DÀNH CHO ADMIN & QUẢN LÝ BTTDC) -->
+            <div id="toolbarAdminActions" style="display:none;gap:8px;align-items:center;">
+              <button class="btn-action btn-primary" onclick="APP.moModalThemDuAn()" style="background:var(--xc);">
+                <span>➕</span> <span>Thêm dự án mới</span>
+              </button>
+            </div>
           </div>
 
           <div class="table-wrapper" style="margin-top: 10px;">
@@ -1217,11 +1391,111 @@
     </div>
   </div>
 
+  <!-- MODAL THÊM DỰ ÁN MỚI (ADMIN & QUẢN LÝ BTTDC) -->
+  <div class="modal-overlay" id="modalThemDuAn">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div class="modal-title">Thêm dự án bồi thường, GPMB mới</div>
+        <button class="modal-close" onclick="APP.dongModalThemDuAn()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-lbl">Tên dự án (*)</label>
+            <input type="text" id="inpMoiTenDA" class="form-input" placeholder="Nhập tên đầy đủ của dự án...">
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Mã định danh dự án</label>
+            <input type="text" id="inpMoiMaDA" class="form-input" placeholder="Để trống để tự sinh mã">
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Dự án thành phần</label>
+            <input type="text" id="inpMoiDATP" class="form-input" placeholder="Ví dụ: DATP 1-5...">
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Đơn vị chủ trì / Ban Bồi thường (*)</label>
+            <select id="selMoiDonVi" class="form-input">
+              <!-- Nạp qua JS -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Địa bàn (Quận/Huyện/Phường)</label>
+            <input type="text" id="inpMoiDiaBan" class="form-input" placeholder="Ví dụ: Củ Chi, Vườn Lài...">
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Nhóm dự án</label>
+            <select id="selMoiNhomDA" class="form-input">
+              <option value="Trọng điểm">Trọng điểm</option>
+              <option value="Thông thường" selected>Thông thường</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Tổng diện tích thu hồi (m²)</label>
+            <input type="number" id="inpMoiTongDT" class="form-input" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Tổng số hộ bị ảnh hưởng</label>
+            <input type="number" id="inpMoiTongHo" class="form-input" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Tổng kinh phí theo PA duyệt (triệu đồng)</label>
+            <input type="number" id="inpMoiTongKP" class="form-input" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label class="form-lbl">Số hộ thuộc diện tái định cư</label>
+            <input type="number" id="inpMoiHoTDC" class="form-input" placeholder="0">
+          </div>
+          <div class="form-group full">
+            <label class="form-lbl">Mốc kế hoạch hoàn thành GPMB</label>
+            <input type="date" id="inpMoiMocKH" class="form-input">
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-modal btn-cancel" onclick="APP.dongModalThemDuAn()">Hủy bỏ</button>
+        <button class="btn-modal btn-save" onclick="APP.luuDuAnMoi()">Lưu dự án mới</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL THÊM KỲ BÁO CÁO MỚI (ADMIN & QUẢN LÝ BTTDC) -->
+  <div class="modal-overlay" id="modalThemKy">
+    <div class="modal-box" style="width: 480px;">
+      <div class="modal-head">
+        <div class="modal-title">Tạo kỳ báo cáo mới</div>
+        <button class="modal-close" onclick="APP.dongModalThemKy()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-lbl">Mã kỳ (định dạng MM/YYYY, ví dụ: 10/2026) (*)</label>
+          <input type="text" id="inpMoiMaKy" class="form-input" placeholder="10/2026">
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Tiêu đề kỳ báo cáo</label>
+          <input type="text" id="inpMoiTieuDeKy" class="form-input" placeholder="Tháng 10 năm 2026">
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Ngày bắt đầu thu thập</label>
+          <input type="date" id="inpMoiNgayBatDau" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-lbl">Ngày kết thúc (khóa sổ)</label>
+          <input type="date" id="inpMoiNgayKetThuc" class="form-input">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-modal btn-cancel" onclick="APP.dongModalThemKy()">Hủy</button>
+        <button class="btn-modal btn-save" onclick="APP.luuKyMoi()">Tạo kỳ</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ============================================================
        4. LOGIC JAVASCRIPT ĐIỀU KHIỂN HỆ THỐNG
        ============================================================ -->
   <script>
     const APP = {
+      currentUser: null,           // Thông tin tài khoản đăng nhập hiện tại
       phanKhuHienTai: 'boi_thuong', // 'boi_thuong' hoặc 'san_xuat'
       kyHienTai: '09/2026',
       danhSachDuAn: [],
@@ -1230,19 +1504,119 @@
 
       init: async function() {
         DB.init();
+
+        // Kiểm tra phiên đăng nhập đã lưu trong sessionStorage
+        const savedUser = sessionStorage.getItem('bttdc_current_user');
+        if (savedUser) {
+          try {
+            this.currentUser = JSON.parse(savedUser);
+            document.getElementById('loginOverlay').style.display = 'none';
+            this.apDungPhanQuyenGiaoDien();
+            await this.taiDuLieu();
+            return;
+          } catch (e) {
+            sessionStorage.removeItem('bttdc_current_user');
+          }
+        }
+
+        // Nếu chưa đăng nhập, hiển thị màn hình đăng nhập
+        document.getElementById('loginOverlay').style.display = 'flex';
+      },
+
+      // 1. CHỌN NHANH TÀI KHOẢN MẪU (3 NHÓM)
+      chonNhanhTaiKhoan: async function(u, p) {
+        document.getElementById('inpLoginUser').value = u;
+        document.getElementById('inpLoginPass').value = p;
+        await this.xuLyDangNhap(u, p);
+      },
+
+      // 2. XỬ LÝ ĐĂNG NHẬP
+      xuLyDangNhap: async function(userArg, passArg) {
+        const u = userArg || document.getElementById('inpLoginUser').value;
+        const p = passArg || document.getElementById('inpLoginPass').value;
+        const errEl = document.getElementById('loginErrMsg');
+        errEl.textContent = '';
+
+        if (!u || !p) {
+          errEl.textContent = 'Vui lòng nhập tên đăng nhập và mật khẩu!';
+          return;
+        }
+
+        const res = await DB.dangNhap(u, p);
+        if (!res.success) {
+          errEl.textContent = res.error || 'Đăng nhập không thành công!';
+          return;
+        }
+
+        this.currentUser = res.user;
+        sessionStorage.setItem('bttdc_current_user', JSON.stringify(res.user));
+
+        // Phân khu ban đầu
+        const portalSelect = document.getElementById('selLoginPortal').value || 'boi_thuong';
+        this.chonPhanKhu(portalSelect);
+
+        // Áp dụng giao diện theo vai trò
+        this.apDungPhanQuyenGiaoDien();
+
+        // Ẩn màn hình đăng nhập và tải dữ liệu
+        document.getElementById('loginOverlay').style.display = 'none';
         await this.taiDuLieu();
       },
 
-      // XỬ LÝ CHỌN PHÂN KHU TẠI TRANG ĐĂNG NHẬP
+      // 3. ĐĂNG XUẤT
+      dangXuat: function() {
+        sessionStorage.removeItem('bttdc_current_user');
+        this.currentUser = null;
+        document.getElementById('loginErrMsg').textContent = '';
+        document.getElementById('loginOverlay').style.display = 'flex';
+      },
+
+      // 4. ÁP DỤNG PHÂN QUYỀN LÊN GIAO DIỆN
+      apDungPhanQuyenGiaoDien: function() {
+        if (!this.currentUser) return;
+        const user = this.currentUser;
+
+        // Cập nhật thông tin trên Sidebar
+        const nameEl = document.getElementById('sbUserName');
+        const roleEl = document.getElementById('sbUserRole');
+
+        nameEl.textContent = user.ho_ten || user.ten_dang_nhap;
+
+        let roleBadge = '';
+        if (user.vai_tro === 'admin_tong') {
+          roleBadge = '👑 Admin KHTC Sở';
+          roleEl.style.color = '#c084fc';
+        } else if (user.vai_tro === 'quan_ly_bttdc') {
+          roleBadge = '📋 Quản lý BTTDC Sở';
+          roleEl.style.color = '#93c5fd';
+        } else {
+          roleBadge = `🏗️ ${user.ten_don_vi || 'Đơn vị thực hiện'}`;
+          roleEl.style.color = '#fde68a';
+        }
+        roleEl.textContent = roleBadge;
+
+        // Quyền Thêm / Xóa Dự án & Thêm Kỳ (Chỉ dành cho Admin & Quản lý BTTDC)
+        const canManage = (user.vai_tro === 'admin_tong' || user.vai_tro === 'quan_ly_bttdc');
+
+        const adminActions = document.getElementById('toolbarAdminActions');
+        if (adminActions) {
+          adminActions.style.display = canManage ? 'flex' : 'none';
+        }
+
+        const btnThemKy = document.getElementById('btnThemKy');
+        if (btnThemKy) {
+          btnThemKy.style.display = canManage ? 'inline-block' : 'none';
+        }
+      },
+
+      // 5. CHỌN PHÂN KHU
       chonPhanKhu: function(maPhanKhu) {
         this.phanKhuHienTai = maPhanKhu;
-        document.getElementById('loginOverlay').style.display = 'none';
 
         if (maPhanKhu === 'boi_thuong') {
           document.getElementById('sbLogoIcon').textContent = '🏛️';
           document.getElementById('sbPortalName').textContent = 'Bồi thường GPMB';
           document.getElementById('sbSubTitle').textContent = 'GPMB & Tái định cư';
-          document.getElementById('sbUserRole').textContent = 'Đầu mối Tổng hợp toàn TP';
           document.getElementById('navBoiThuong').style.display = 'block';
           document.getElementById('navSanXuat').style.display = 'none';
           document.getElementById('viewBoiThuong').style.display = 'block';
@@ -1254,7 +1628,6 @@
           document.getElementById('sbLogoIcon').textContent = '🌾';
           document.getElementById('sbPortalName').textContent = 'Sản xuất Nông nghiệp';
           document.getElementById('sbSubTitle').textContent = 'Nông nghiệp & PTNT';
-          document.getElementById('sbUserRole').textContent = 'Báo cáo viên Chuyên ngành';
           document.getElementById('navBoiThuong').style.display = 'none';
           document.getElementById('navSanXuat').style.display = 'block';
           document.getElementById('viewBoiThuong').style.display = 'none';
@@ -1269,14 +1642,32 @@
         document.getElementById('loginOverlay').style.display = 'flex';
       },
 
+      // 6. TẢI DỮ LIỆU CÓ BỘ LỌC PHÂN QUYỀN
       taiDuLieu: async function() {
-        this.danhSachDuAn = await DB.layDanhSachTienDo(this.kyHienTai);
-        this.tongHopTP = await DB.layTongHopToanTP(this.kyHienTai);
-        this.dsKhoKhan = await DB.layDanhSachKhoKhan(this.kyHienTai);
+        this.danhSachDuAn = await DB.layDanhSachTienDo(this.kyHienTai, this.currentUser);
+        this.tongHopTP = await DB.layTongHopToanTP(this.kyHienTai, this.currentUser, this.danhSachDuAn);
+        this.dsKhoKhan = await DB.layDanhSachKhoKhan(this.kyHienTai, this.currentUser);
 
         this.hienThiDashboard();
         this.hienThiBangTienDo(this.danhSachDuAn);
         this.hienThiBangKhoKhan(this.dsKhoKhan);
+        await this.napDanhSachKyBaoCao();
+      },
+
+      // Nạp danh sách kỳ báo cáo vào select
+      napDanhSachKyBaoCao: async function() {
+        const dsKy = await DB.layDanhSachKy();
+        const sel = document.getElementById('selKyBaoCao');
+        if (!sel || !dsKy || dsKy.length === 0) return;
+
+        sel.innerHTML = '';
+        dsKy.forEach(k => {
+          const opt = document.createElement('option');
+          opt.value = k.ma_ky;
+          opt.textContent = `${k.tieu_de_ky || k.ma_ky} (${k.trang_thai === 'dang_thu_thap' ? 'Đang thu thập' : 'Đã khóa'})`;
+          if (k.ma_ky === this.kyHienTai) opt.selected = true;
+          sel.appendChild(opt);
+        });
       },
 
       hienThiDashboard: function() {
@@ -1306,9 +1697,14 @@
         tbody.innerHTML = '';
 
         if (!list || list.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="30" style="text-align:center;padding:30px;color:var(--g4);">Chưa có dữ liệu dự án trong kỳ này</td></tr>';
+          const roleHint = (this.currentUser && this.currentUser.vai_tro === 'don_vi_thuc_hien') 
+            ? `Đơn vị "${this.currentUser.ten_don_vi || this.currentUser.ma_don_vi}" chưa có dự án nào trong kỳ này.`
+            : 'Chưa có dữ liệu dự án trong kỳ này.';
+          tbody.innerHTML = `<tr><td colspan="30" style="text-align:center;padding:30px;color:var(--g4);font-size:13px;">${roleHint}</td></tr>`;
           return;
         }
+
+        const canDelete = this.currentUser && (this.currentUser.vai_tro === 'admin_tong' || this.currentUser.vai_tro === 'quan_ly_bttdc');
 
         list.forEach((da, idx) => {
           const tyLeDT = UTILS.tinhTyLeDienTich(da.dien_tich_da_thu_hoi, da.tong_dien_tich_thu_hoi);
@@ -1316,6 +1712,15 @@
           const tyLeGN = UTILS.tinhTyLeGiaiNgan(da.giai_ngan_luy_ke_nam, da.ke_hoach_von_nam);
           const chenhLech = UTILS.tinhChenhLechTienDo(da.ngay_hoan_thanh_thuc_te, da.moc_ke_hoach_gpmb);
           const conLaiTDC = (da.so_ho_tai_dinh_cu || 0) - (da.so_da_bo_tri_tdc || 0);
+
+          let actionButtons = `
+            <button class="btn-action btn-primary" style="padding:4px 8px;font-size:11px;" onclick="APP.moModalCapNhat('${da.id}')" title="Cập nhật tiến độ dự án">✏️ Nhập số liệu</button>
+          `;
+          if (canDelete) {
+            actionButtons += `
+              <button class="btn-action" style="padding:4px 7px;font-size:11px;background:#ef4444;color:#fff;margin-left:4px;" onclick="APP.xoaDuAn('${da.id}')" title="Xóa dự án khỏi hệ thống">🗑️</button>
+            `;
+          }
 
           const tr = document.createElement('tr');
           tr.innerHTML = `
@@ -1348,9 +1753,7 @@
             <td class="center">${UTILS.dinhDangNgay(da.ngay_hoan_thanh_thuc_te)}</td>
             <td class="center">${UTILS.taoBadgeChenhLech(chenhLech)}</td>
             <td class="center">${UTILS.taoBadgeTinhTrang(da.tinh_trang_tong_the)}</td>
-            <td class="center">
-              <button class="btn-action btn-primary" style="padding:4px 8px;font-size:11px;" onclick="APP.moModalCapNhat('${da.id}')">✏️ Sửa</button>
-            </td>
+            <td class="center" style="white-space:nowrap;">${actionButtons}</td>
           `;
           tbody.appendChild(tr);
         });
@@ -1435,6 +1838,7 @@
         await this.taiDuLieu();
       },
 
+      // 7. CẬP NHẬT TIẾN ĐỘ DỰ ÁN
       moModalCapNhat: function(daId) {
         const da = this.danhSachDuAn.find(d => d.id === daId);
         if (!da) return;
@@ -1481,6 +1885,132 @@
           await this.taiDuLieu();
         } else {
           alert('Lỗi cập nhật: ' + res.error);
+        }
+      },
+
+      // 8. THÊM DỰ ÁN MỚI (ADMIN & QUẢN LÝ BTTDC)
+      moModalThemDuAn: async function() {
+        const dsDonVi = await DB.layDanhSachDonVi();
+        const sel = document.getElementById('selMoiDonVi');
+        sel.innerHTML = '';
+        dsDonVi.forEach(dv => {
+          const opt = document.createElement('option');
+          opt.value = dv.ma_don_vi;
+          opt.textContent = dv.ten_don_vi;
+          sel.appendChild(opt);
+        });
+
+        // Reset inputs
+        document.getElementById('inpMoiTenDA').value = '';
+        document.getElementById('inpMoiMaDA').value = '';
+        document.getElementById('inpMoiDATP').value = '';
+        document.getElementById('inpMoiDiaBan').value = '';
+        document.getElementById('inpMoiTongDT').value = '';
+        document.getElementById('inpMoiTongHo').value = '';
+        document.getElementById('inpMoiTongKP').value = '';
+        document.getElementById('inpMoiHoTDC').value = '';
+        document.getElementById('inpMoiMocKH').value = '';
+
+        document.getElementById('modalThemDuAn').classList.add('open');
+      },
+
+      dongModalThemDuAn: function() {
+        document.getElementById('modalThemDuAn').classList.remove('open');
+      },
+
+      luuDuAnMoi: async function() {
+        const tenDA = document.getElementById('inpMoiTenDA').value.trim();
+        if (!tenDA) {
+          alert('Vui lòng nhập tên dự án!');
+          return;
+        }
+
+        let maDA = document.getElementById('inpMoiMaDA').value.trim();
+        if (!maDA) {
+          maDA = 'DA_' + Date.now().toString(36).toUpperCase();
+        }
+
+        const duAnMoi = {
+          id: maDA,
+          ten_du_an: tenDA,
+          du_an_thanh_phan: document.getElementById('inpMoiDATP').value.trim() || null,
+          ma_don_vi_gpmb: document.getElementById('selMoiDonVi').value,
+          dia_ban: document.getElementById('inpMoiDiaBan').value.trim() || 'TP.HCM',
+          nhom_du_an: document.getElementById('selMoiNhomDA').value,
+          tong_dien_tich_thu_hoi: Number(document.getElementById('inpMoiTongDT').value) || 0,
+          tong_so_ho_anh_huong: Number(document.getElementById('inpMoiTongHo').value) || 0,
+          tong_kinh_phi_duyet: Number(document.getElementById('inpMoiTongKP').value) || 0,
+          so_ho_tai_dinh_cu: Number(document.getElementById('inpMoiHoTDC').value) || 0,
+          moc_ke_hoach_gpmb: document.getElementById('inpMoiMocKH').value || null
+        };
+
+        const res = await DB.themDuAn(duAnMoi);
+        if (res.success) {
+          alert(`Đã thêm dự án "${tenDA}" thành công!`);
+          this.dongModalThemDuAn();
+          await this.taiDuLieu();
+        } else {
+          alert('Lỗi thêm dự án: ' + res.error);
+        }
+      },
+
+      // 9. XÓA DỰ ÁN (ADMIN & QUẢN LÝ BTTDC)
+      xoaDuAn: async function(daId) {
+        const da = this.danhSachDuAn.find(d => d.id === daId);
+        const ten = da ? da.ten_du_an : daId;
+        if (!confirm(`Bạn có chắc chắn muốn xóa dự án "${ten}" khỏi hệ thống?`)) return;
+
+        const res = await DB.xoaDuAn(daId);
+        if (res.success) {
+          alert('Đã xóa dự án thành công!');
+          await this.taiDuLieu();
+        } else {
+          alert('Lỗi xóa dự án: ' + res.error);
+        }
+      },
+
+      // 10. THÊM KỲ BÁO CÁO (ADMIN & QUẢN LÝ BTTDC)
+      moModalThemKy: function() {
+        document.getElementById('inpMoiMaKy').value = '';
+        document.getElementById('inpMoiTieuDeKy').value = '';
+        document.getElementById('inpMoiNgayBatDau').value = '';
+        document.getElementById('inpMoiNgayKetThuc').value = '';
+        document.getElementById('modalThemKy').classList.add('open');
+      },
+
+      dongModalThemKy: function() {
+        document.getElementById('modalThemKy').classList.remove('open');
+      },
+
+      luuKyMoi: async function() {
+        const maKy = document.getElementById('inpMoiMaKy').value.trim();
+        if (!maKy) {
+          alert('Vui lòng nhập mã kỳ báo cáo (ví dụ: 10/2026)!');
+          return;
+        }
+
+        const tieuDe = document.getElementById('inpMoiTieuDeKy').value.trim() || `Kỳ báo cáo ${maKy}`;
+        const ngayBD = document.getElementById('inpMoiNgayBatDau').value || new Date().toISOString().substring(0, 10);
+        const ngayKT = document.getElementById('inpMoiNgayKetThuc').value || new Date().toISOString().substring(0, 10);
+
+        const kyMoi = {
+          ma_ky: maKy,
+          tieu_de_ky: tieuDe,
+          nam: Number(maKy.split('/')[1]) || 2026,
+          thang: Number(maKy.split('/')[0]) || 10,
+          ngay_bat_dau: ngayBD,
+          ngay_ket_thuc: ngayKT,
+          trang_thai: 'dang_thu_thap'
+        };
+
+        const res = await DB.themKyBaoCao(kyMoi);
+        if (res.success) {
+          alert(`Đã tạo kỳ báo cáo ${tieuDe} thành công!`);
+          this.dongModalThemKy();
+          this.kyHienTai = maKy;
+          await this.taiDuLieu();
+        } else {
+          alert('Lỗi tạo kỳ báo cáo: ' + res.error);
         }
       },
 

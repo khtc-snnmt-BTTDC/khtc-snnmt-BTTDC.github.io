@@ -35,6 +35,62 @@ const CONFIG = {
     }
   },
 
+  // 3 Nhóm tài khoản & Phân quyền hệ thống
+  VAI_TRO: {
+    ADMIN_TONG: {
+      ma: 'admin_tong',
+      ten: 'Quản trị hệ thống (Phòng Kế hoạch - Tài chính Sở)',
+      ten_ngan: 'Admin KHTC Sở',
+      bieu_tuong: '👑',
+      tai_khoan_mac_dinh: 'khtc.snnmt',
+      mo_ta: 'Toàn quyền quản trị hệ thống, xem toàn bộ số liệu 2 phân khu, cấu hình và xuất báo cáo tổng hợp.'
+    },
+    QUAN_LY_BTTDC: {
+      ma: 'quan_ly_bttdc',
+      ten: 'Quản lý báo cáo BTTDC (Phòng Bồi thường, hỗ trợ, tái định cư Sở)',
+      ten_ngan: 'Quản lý BTTDC',
+      bieu_tuong: '📋',
+      tai_khoan_mac_dinh: 'bttdc.snnmt',
+      mo_ta: 'Theo dõi, đôn đốc toàn TP; nhập liệu cho TẤT CẢ dự án; có quyền thêm, xóa dự án; thêm, xóa kỳ báo cáo.'
+    },
+    DON_VI_THUC_HIEN: {
+      ma: 'don_vi_thuc_hien',
+      ten: 'Đơn vị trực tiếp thực hiện công tác bồi thường GPMB',
+      ten_ngan: 'Đơn vị thực hiện',
+      bieu_tuong: '🏗️',
+      tai_khoan_mac_dinh: 'BQLDA_DTXD_VuonLai',
+      mo_ta: 'Chỉ nhập và thấy tiến độ dự án của chính đơn vị mình phụ trách.'
+    }
+  },
+
+  // Danh mục tài khoản gợi ý đăng nhập nhanh
+  TAI_KHOAN_GOI_Y: [
+    {
+      ten_dang_nhap: 'khtc.snnmt',
+      mat_khau: 'khtc123',
+      ho_ten: 'Phòng Kế hoạch - Tài chính (Sở NN&MT)',
+      vai_tro: 'admin_tong',
+      ma_don_vi: 'SNNMT_KHTC',
+      nhom_label: '👑 Nhóm 1: Admin KHTC Sở'
+    },
+    {
+      ten_dang_nhap: 'bttdc.snnmt',
+      mat_khau: 'bttdc123',
+      ho_ten: 'Phòng Bồi thường, hỗ trợ, tái định cư Sở',
+      vai_tro: 'quan_ly_bttdc',
+      ma_don_vi: 'SNNMT_BTTDC',
+      nhom_label: '📋 Nhóm 2: Quản lý BTTDC Sở'
+    },
+    {
+      ten_dang_nhap: 'BQLDA_DTXD_VuonLai',
+      mat_khau: 'vuonlai123',
+      ho_ten: 'Ban QLDA ĐTXD phường Vườn Lài',
+      vai_tro: 'don_vi_thuc_hien',
+      ma_don_vi: 'BQLDA_VUONLAI',
+      nhom_label: '🏗️ Nhóm 3: Đơn vị trực tiếp (Vườn Lài)'
+    }
+  ],
+
   // File mẫu báo cáo chính thức gửi kèm công văn Sở
   FILE_MAU_EXCEL: 'Theo_doi_tien_do_boi_thuong_GPMB.xlsx',
 
@@ -80,6 +136,7 @@ const CONFIG = {
 if (typeof Object.freeze === 'function') {
   Object.freeze(CONFIG);
   Object.freeze(CONFIG.PHAN_KHU);
+  Object.freeze(CONFIG.VAI_TRO);
   Object.freeze(CONFIG.BANG);
   Object.freeze(CONFIG.VIEWS);
 }

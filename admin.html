@@ -224,6 +224,61 @@
           </tbody>
         </table>
       </section>
+      <!-- PANEL 3: QUẢN LÝ NGƯỜI DÙNG & ĐƠN VỊ (3 NHÓM TÀI KHOẢN) -->
+      <section id="panelTaiKhoan" class="card-panel" style="display:none;">
+        <div class="panel-head">
+          <div class="panel-title">Danh sách tài khoản & phân quyền 3 nhóm người dùng</div>
+          <span style="font-size:11px;color:var(--g4);">Căn cứ quy chế phân quyền BTTDC</span>
+        </div>
+        <table class="adm-tbl">
+          <thead>
+            <tr>
+              <th>Tên đăng nhập</th>
+              <th>Họ tên / Đơn vị</th>
+              <th>Nhóm quyền hạn</th>
+              <th>Phạm vi dữ liệu</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:#faf5ff;">
+              <td><code>khtc.snnmt</code></td>
+              <td><strong>Phòng Kế hoạch - Tài chính (Sở NN&MT)</strong></td>
+              <td><span style="background:#f3e8ff;color:#6b21a8;padding:3px 8px;border-radius:6px;font-weight:700;font-size:11px;">👑 Admin Tổng Sở</span></td>
+              <td>Toàn quyền hệ thống, 2 phân khu, phê duyệt số liệu toàn TP</td>
+              <td><span style="background:#ecfdf5;color:#047857;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;">Hoạt động</span></td>
+            </tr>
+            <tr style="background:#eff6ff;">
+              <td><code>bttdc.snnmt</code></td>
+              <td><strong>Phòng Bồi thường, hỗ trợ, tái định cư trực thuộc Sở</strong></td>
+              <td><span style="background:#dbeafe;color:#1e40af;padding:3px 8px;border-radius:6px;font-weight:700;font-size:11px;">📋 Quản lý BTTDC</span></td>
+              <td>Theo dõi đôn đốc toàn TP; nhập liệu TẤT CẢ dự án; thêm/xóa DA; thêm/xóa kỳ</td>
+              <td><span style="background:#ecfdf5;color:#047857;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;">Hoạt động</span></td>
+            </tr>
+            <tr>
+              <td><code>BQLDA_DTXD_VuonLai</code></td>
+              <td><strong>Ban QLDA ĐTXD phường Vườn Lài</strong></td>
+              <td><span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:6px;font-weight:700;font-size:11px;">🏗️ Đơn vị thực hiện</span></td>
+              <td>Chỉ xem và nhập tiến độ dự án của phường Vườn Lài</td>
+              <td><span style="background:#ecfdf5;color:#047857;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;">Hoạt động</span></td>
+            </tr>
+            <tr>
+              <td><code>ban_gpmb_tp</code></td>
+              <td><strong>Ban Bồi thường, GPMB TP.HCM</strong></td>
+              <td><span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:6px;font-weight:700;font-size:11px;">🏗️ Đơn vị thực hiện</span></td>
+              <td>Chỉ xem và nhập tiến độ dự án do Ban GPMB TP phụ trách</td>
+              <td><span style="background:#ecfdf5;color:#047857;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;">Hoạt động</span></td>
+            </tr>
+            <tr>
+              <td><code>bldt_cuchi</code></td>
+              <td><strong>Ban Bồi thường GPMB huyện Củ Chi</strong></td>
+              <td><span style="background:#fef3c7;color:#92400e;padding:3px 8px;border-radius:6px;font-weight:700;font-size:11px;">🏗️ Đơn vị thực hiện</span></td>
+              <td>Chỉ xem và nhập tiến độ dự án trên địa bàn Củ Chi (Vành đai 4...)</td>
+              <td><span style="background:#ecfdf5;color:#047857;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;">Hoạt động</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </div>
   </main>
 
@@ -235,6 +290,7 @@
 
         document.getElementById('panelKy').style.display = 'none';
         document.getElementById('panelDuAn').style.display = 'none';
+        document.getElementById('panelTaiKhoan').style.display = 'none';
 
         if (tab === 'ky') {
           document.getElementById('panelKy').style.display = 'block';
@@ -242,6 +298,9 @@
         } else if (tab === 'du-an') {
           document.getElementById('panelDuAn').style.display = 'block';
           document.getElementById('adminPageTitle').textContent = 'DANH MỤC HỒ SƠ PHÊ DUYỆT CÁC DỰ ÁN';
+        } else if (tab === 'tai-khoan') {
+          document.getElementById('panelTaiKhoan').style.display = 'block';
+          document.getElementById('adminPageTitle').textContent = 'QUẢN LÝ NGƯỜI DÙNG & PHÂN QUYỀN 3 NHÓM TÀI KHOẢN';
         }
       }
     };
