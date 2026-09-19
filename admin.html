@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản trị Hệ thống — Theo dõi Bồi thường, Hỗ trợ & Tái định cư</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/db.js"></script>
+
+  <style>
+    :root {
+      --xd: #1b4332;
+      --xc: #2d6a4f;
+      --xn: #52b788;
+      --xp: #d8f3dc;
+      --w: #ffffff;
+      --g1: #f4f6f5;
+      --g2: #e4e9e6;
+      --g3: #c5d0c9;
+      --g4: #7a9485;
+      --g5: #3d5247;
+      --dk: #1a2e22;
+      --red: #c0392b;
+      --amb: #b45309;
+      --blue: #1d4ed8;
+      --sw: 250px;
+      --font: 'Be Vietnam Pro', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --r: 8px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      font-size: 13.5px;
+      color: var(--dk);
+      background: var(--g1);
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .sb {
+      width: var(--sw);
+      background: var(--xd);
+      color: var(--w);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sb-head { padding: 16px 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .sb-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .sb-logo-icon { width: 34px; height: 34px; background: linear-gradient(135deg, #d97706, #b45309); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .sb-logo-title { font-size: 12px; font-weight: 700; text-transform: uppercase; }
+
+    .sb-nav { flex: 1; overflow-y: auto; padding: 12px 10px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 6px;
+      color: rgba(255,255,255,0.75); font-size: 12.5px; font-weight: 500; cursor: pointer; margin-bottom: 2px;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .nav-item.active { background: linear-gradient(135deg, var(--xc), #387c5d); color: #fff; font-weight: 600; }
+
+    .sb-foot { padding: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .btn-sb {
+      width: 100%; padding: 8px 10px; background: rgba(255,255,255,0.08); border: none; border-radius: 6px;
+      color: rgba(255,255,255,0.85); font-family: var(--font); font-size: 11.5px; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;
+    }
+    .btn-sb:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .topbar {
+      height: 52px; background: #fff; border-bottom: 1px solid var(--g2); display: flex;
+      align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0;
+    }
+    .topbar-title { font-size: 14.5px; font-weight: 700; color: var(--xd); }
+
+    .content { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+    .card-panel {
+      background: #fff; border-radius: var(--r); border: 1px solid var(--g2); box-shadow: 0 1px 4px rgba(0,0,0,0.05); overflow: hidden;
+    }
+    .panel-head {
+      padding: 12px 16px; background: var(--g1); border-bottom: 1px solid var(--g2); display: flex; justify-content: space-between; align-items: center;
+    }
+    .panel-title { font-size: 13px; font-weight: 700; color: var(--xd); }
+
+    table.adm-tbl { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+    table.adm-tbl th { background: #fafafa; padding: 8px 12px; border-bottom: 1px solid var(--g2); text-align: left; font-weight: 600; color: var(--g5); }
+    table.adm-tbl td { padding: 8px 12px; border-bottom: 1px solid var(--g2); vertical-align: middle; }
+    table.adm-tbl tr:hover td { background: #f9fbf9; }
+
+    .btn-action {
+      padding: 5px 10px; border-radius: 5px; font-family: var(--font); font-size: 11.5px; font-weight: 600;
+      cursor: pointer; border: 1px solid var(--g3); background: #fff; color: var(--dk);
+    }
+    .btn-action.primary { background: var(--xc); color: #fff; border: none; }
+  </style>
+</head>
+<body>
+
+  <aside class="sb">
+    <div class="sb-head">
+      <div class="sb-logo">
+        <div class="sb-logo-icon">⚙️</div>
+        <div class="sb-logo-title">Quản trị Hệ thống<br><span style="color:#fcd34d;font-size:10px;">Phòng KHTC</span></div>
+      </div>
+    </div>
+
+    <nav class="sb-nav">
+      <div class="nav-item active" onclick="ADMIN.chuyenTab('ky', this)">
+        <span>📅</span> <span>Quản lý Kỳ báo cáo</span>
+      </div>
+      <div class="nav-item" onclick="ADMIN.chuyenTab('du-an', this)">
+        <span>📁</span> <span>Danh mục Dự án</span>
+      </div>
+      <div class="nav-item" onclick="ADMIN.chuyenTab('tai-khoan', this)">
+        <span>👥</span> <span>Người dùng & Đơn vị</span>
+      </div>
+    </nav>
+
+    <div class="sb-foot">
+      <a href="index.html" class="btn-sb">⬅️ Quay lại Cổng nhập liệu</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div class="topbar-title" id="adminPageTitle">QUẢN LÝ KỲ BÁO CÁO THU THẬP SỐ LIỆU</div>
+      <div>
+        <span style="font-size:12px;color:var(--g4);">Cơ sở dữ liệu: Supabase PostgreSQL</span>
+      </div>
+    </header>
+
+    <div class="content">
+      <!-- PANEL 1: QUẢN LÝ KỲ BÁO CÁO -->
+      <section id="panelKy" class="card-panel">
+        <div class="panel-head">
+          <div class="panel-title">Danh sách các kỳ báo cáo giám sát bồi thường GPMB</div>
+          <button class="btn-action primary" onclick="alert('Tính năng mở kỳ mới đang chuẩn bị kết nối CSDL Supabase!')">+ Mở kỳ báo cáo mới</button>
+        </div>
+        <table class="adm-tbl">
+          <thead>
+            <tr>
+              <th>Mã kỳ</th>
+              <th>Tiêu đề kỳ</th>
+              <th>Thời gian mở</th>
+              <th>Hạn chót</th>
+              <th>Trạng thái</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>09/2026</strong></td>
+              <td>Tháng 09 năm 2026</td>
+              <td>01/09/2026</td>
+              <td>25/09/2026</td>
+              <td><span style="background:#ecfdf5;color:#047857;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;">Đang thu thập</span></td>
+              <td>
+                <button class="btn-action" onclick="alert('Đã chuyển kỳ sang trạng thái khóa!')">🔒 Khóa kỳ</button>
+              </td>
+            </tr>
+            <tr>
+              <td><strong>08/2026</strong></td>
+              <td>Tháng 08 năm 2026</td>
+              <td>01/08/2026</td>
+              <td>25/08/2026</td>
+              <td><span style="background:#f3f4f6;color:#4b5563;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;">Đã khóa</span></td>
+              <td>
+                <button class="btn-action" onclick="alert('Yêu cầu cấp quyền mở lại kỳ!')">🔓 Mở lại</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- PANEL 2: QUẢN LÝ DANH MỤC DỰ ÁN -->
+      <section id="panelDuAn" class="card-panel" style="display:none;">
+        <div class="panel-head">
+          <div class="panel-title">Danh mục hồ sơ phê duyệt các dự án đầu tư</div>
+          <button class="btn-action primary" onclick="alert('Tính năng thêm dự án mới!')">+ Thêm dự án</button>
+        </div>
+        <table class="adm-tbl">
+          <thead>
+            <tr>
+              <th>Mã DA</th>
+              <th>Tên dự án</th>
+              <th>Địa bàn</th>
+              <th>Nhóm dự án</th>
+              <th>Tổng DT thu hồi (m²)</th>
+              <th>Tổng KP duyệt (tr.đ)</th>
+              <th>Mốc KH GPMB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>DA_VD4_DATP15</code></td>
+              <td><strong>DATP 1-5 Vành đai 4 TP.HCM</strong></td>
+              <td>Củ Chi</td>
+              <td><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:6px;font-size:11px;">Trọng điểm</span></td>
+              <td>850,000 m²</td>
+              <td>4,500,000 tr.đ</td>
+              <td>31/12/2027</td>
+            </tr>
+            <tr>
+              <td><code>DA_XUYEN_TAM</code></td>
+              <td><strong>Cải tạo rạch Xuyên Tâm</strong></td>
+              <td>Bình Thạnh</td>
+              <td><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:6px;font-size:11px;">Trọng điểm</span></td>
+              <td>120,000 m²</td>
+              <td>1,200,000 tr.đ</td>
+              <td>31/12/2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const ADMIN = {
+      chuyenTab: function(tab, el) {
+        document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+        if (el) el.classList.add('active');
+
+        document.getElementById('panelKy').style.display = 'none';
+        document.getElementById('panelDuAn').style.display = 'none';
+
+        if (tab === 'ky') {
+          document.getElementById('panelKy').style.display = 'block';
+          document.getElementById('adminPageTitle').textContent = 'QUẢN LÝ KỲ BÁO CÁO THU THẬP SỐ LIỆU';
+        } else if (tab === 'du-an') {
+          document.getElementById('panelDuAn').style.display = 'block';
+          document.getElementById('adminPageTitle').textContent = 'DANH MỤC HỒ SƠ PHÊ DUYỆT CÁC DỰ ÁN';
+        }
+      }
+    };
+  </script>
+</body>
+</html>
