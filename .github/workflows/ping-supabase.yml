@@ -1,0 +1,53 @@
+name: Ping Supabase - Giữ dự án không bị tạm khóa
+
+on:
+  schedule:
+    # Chạy tự động mỗi 5 ngày lúc 02:00 UTC (09:00 giờ Việt Nam)
+    # Supabase sẽ tạm khóa dự án sau 7 ngày không hoạt động trên plan Free
+    - cron: '0 2 */5 * *'
+  workflow_dispatch:
+    # Cho phép kích hoạt thủ công từ giao diện GitHub Actions
+
+jobs:
+  ping-supabase:
+    name: Ping Supabase REST API
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping bảng don_vi (kiểm tra kết nối CSDL)
+        run: |
+          echo "📡 Đang ping Supabase REST API tại ${{ secrets.SUPABASE_URL }}..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/don_vi?select=ma_don_vi&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          echo "📊 HTTP Response Code: $RESPONSE"
+          if [ "$RESPONSE" -ge 200 ] && [ "$RESPONSE" -lt 300 ]; then
+            echo "✅ Supabase phản hồi OK ($RESPONSE) — Dự án đang hoạt động bình thường."
+          elif [ "$RESPONSE" -eq 401 ] || [ "$RESPONSE" -eq 403 ]; then
+            echo "⚠️ Lỗi xác thực ($RESPONSE) — Kiểm tra lại SUPABASE_ANON_KEY trong GitHub Secrets."
+            exit 1
+          else
+            echo "❌ Lỗi kết nối ($RESPONSE) — Supabase có thể đang bị gián đoạn hoặc tạm khóa."
+            exit 1
+          fi
+
+      - name: Ping bảng ky_bao_cao (xác minh view hoạt động)
+        run: |
+          echo "📡 Đang kiểm tra bảng ky_bao_cao..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/ky_bao_cao?select=ma_ky&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+          echo "📊 HTTP Response Code: $RESPONSE"
+          if [ "$RESPONSE" -ge 200 ] && [ "$RESPONSE" -lt 300 ]; then
+            echo "✅ Bảng ky_bao_cao phản hồi OK ($RESPONSE)."
+          else
+            echo "⚠️ Bảng ky_bao_cao trả về mã $RESPONSE (có thể bình thường nếu RLS chặn SELECT cho anon)."
+          fi
+
+      - name: Ghi log thời gian ping
+        run: |
+          echo "🕐 Ping thực hiện lúc: $(TZ='Asia/Ho_Chi_Minh' date '+%d/%m/%Y %H:%M:%S %Z')"
+          echo "🌐 Supabase URL: ${{ secrets.SUPABASE_URL }}"
+          echo "✅ Hoàn tất — Dự án Supabase được giữ hoạt động thành công."
